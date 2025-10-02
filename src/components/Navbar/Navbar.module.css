@@ -1,3 +1,6 @@
+/* Navbar.module.css */
+
+/* Base styles */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -9,6 +12,7 @@
   top: 0;
   left: 0;
   right: 0;
+  z-index: 100;
 }
 
 .logo {
@@ -37,8 +41,8 @@
 
 .dropdown {
   position: absolute;
-  top: 50px;
-  right: 0;
+  top: 45px; /* slightly below profile pic */
+  right: 0; /* aligned to profile pic */
   background: #fff;
   color: #333;
   border: 1px solid #ccc;
@@ -46,6 +50,8 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  min-width: 120px;
+  z-index: 10;
 }
 
 .dropdown button {
@@ -67,4 +73,53 @@
   font-weight: 700;
   text-decoration: underline;
   cursor: pointer;
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .navbar {
+    padding: 0.8rem 1rem;
+  }
+
+  .username {
+    font-size: 0.9rem;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .dropdown {
+    top: 45px;
+    right: 0;
+    min-width: 100px;
+  }
+
+  .dropdown button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .logoutButton {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .logo {
+    font-size: 1.3rem;
+  }
+
+  .profilePic {
+    width: 32px;
+    height: 32px;
+  }
+
+  .username {
+    display: none; /* hide username on very small screens */
+  }
+
+  .logoutButton {
+    font-size: 0.8rem;
+  }
 }

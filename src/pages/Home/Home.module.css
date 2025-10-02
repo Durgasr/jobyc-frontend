@@ -2,20 +2,19 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 100vh; /* fit exactly in viewport */
+  min-height: 100vh; 
   padding: 20px 50px;
   background: linear-gradient(to right, #eef2ff, #e0e7ff);
   color: #1f2937;
   gap: 30px;
   flex-wrap: wrap;
   box-sizing: border-box;
-  overflow: hidden; /* prevent vertical scroll */
 }
 
 /* Left section */
 .left {
   flex: 1;
-  min-width: 250px;
+  min-width: 280px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,14 +22,14 @@
 }
 
 .mainHeading {
-  font-size: 2rem; /* slightly smaller to fit */
+  font-size: 2.5rem;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.2;
   color: #1e3a8a;
 }
 
 .typingText {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   color: #374151;
 }
 
@@ -41,17 +40,10 @@
   color: #2563eb;
 }
 
-/* Actions / buttons */
-/* .actions {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-} */
-
+/* Buttons */
 .button {
-  width: 1 rem;
   padding: 10px 25px;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 600;
   border: none;
   border-radius: 8px;
@@ -60,32 +52,23 @@
   background: linear-gradient(45deg, #3b82f6, #6366f1);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
-}
-
-.button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(45deg, #6366f1, #3b82f6);
-}
-
-.button:active {
-  transform: translateY(0);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  width: auto;
 }
 
 /* Right section */
 .right {
   flex: 1;
-  min-width: 250px;
+  min-width: 280px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
 .right img {
-  max-width: 90%; /* scale down to fit */
-  max-height: 70vh; /* ensure it fits in viewport */
-  height: auto;
+  margin-top: 50px;
+  width: 55%;
+  max-width: 500px;
+  height: 65vh;
   border-radius: 12px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   transition: transform 0.3s ease;
@@ -95,17 +78,16 @@
   transform: scale(1.02);
 }
 
-/* Responsive design */
+/* Medium devices */
 @media (max-width: 900px) {
   .home {
     flex-direction: column-reverse;
     text-align: center;
-    padding: 15px;
-    gap: 20px;
+    padding: 20px;
   }
 
   .mainHeading {
-    font-size: 1.7rem;
+    font-size: 2rem;
   }
 
   .typingText {
@@ -118,7 +100,7 @@
 
   .button {
     padding: 8px 20px;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
   }
 
   .right img {
@@ -127,56 +109,43 @@
   }
 }
 
-/* Fade-in slide-up for main heading and tagline */
-@keyframes fadeSlideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.mainHeading {
-  animation: fadeSlideUp 1s ease forwards;
-}
-
-.typingText {
-  width: 100%; /* container width */
-  max-width: 800px; /* optional */
-  font-family: "Roboto Mono", monospace;
-  font-weight: 300;
-  /* letter-spacing: 0.px; */
-  font-size: 1rem;
-  color: #077225;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 2px solid #3b82f6;
-  animation: typing 4s steps(50, end), blink 0.75s step-end infinite;
-}
-
-/* Typing effect */
-@keyframes typing {
-  from {
-    width: 0;
-  }
-  to {
+/* Small devices */
+@media (max-width: 500px) {
+  .home {
     width: 100%;
+    background: linear-gradient(to right, #eef2ff, #e0e7ff);
+    padding: 25px;
+    text-align: center;
   }
-}
+  .mainHeading {
+    font-size: 1.6rem;
+  }
 
-@keyframes blink {
-  50% {
-    border-color: transparent;
+  .typingText {
+    font-size: 0.9rem;
   }
-  0%,
-  100% {
-    border-color: #3b82f6;
-  }
-}
 
-.tagline {
-  animation: fadeSlideUp 1.5s ease forwards;
+  .tagline {
+    font-size: 0.8rem;
+  }
+
+  .right img {
+    max-width: 90%;
+    max-height: 40vh;
+  }
+
+  .button {
+  padding: 10px 25px;
+  font-size: 1rem;
+  font-weight: 400;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(45deg, #3b82f6, #6366f1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+  width: auto;
+  text-align: center;
+}
 }
