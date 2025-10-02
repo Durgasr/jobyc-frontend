@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import axios from "axios";
 import { UserContext } from "../../context/userContext";
@@ -8,7 +8,6 @@ import { Navbar } from "../../components/Navbar/Navbar";
 import { Layout } from "../../components/Layout/Layout";
 
 export const Register = () => {
-  const location = useLocation();
   const navigate = useNavigate();
   const { setUser, setLoading } = useContext(UserContext);
   const [role, setRole] = useState("");
