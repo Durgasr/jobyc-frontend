@@ -1,0 +1,182 @@
+.home {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100vh; /* fit exactly in viewport */
+  padding: 20px 50px;
+  background: linear-gradient(to right, #eef2ff, #e0e7ff);
+  color: #1f2937;
+  gap: 30px;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  overflow: hidden; /* prevent vertical scroll */
+}
+
+/* Left section */
+.left {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+}
+
+.mainHeading {
+  font-size: 2rem; /* slightly smaller to fit */
+  font-weight: 700;
+  line-height: 1.1;
+  color: #1e3a8a;
+}
+
+.typingText {
+  font-size: 1.1rem;
+  color: #374151;
+}
+
+.tagline {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: #2563eb;
+}
+
+/* Actions / buttons */
+/* .actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+} */
+
+.button {
+  width: 1 rem;
+  padding: 10px 25px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: white;
+  background: linear-gradient(45deg, #3b82f6, #6366f1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(45deg, #6366f1, #3b82f6);
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Right section */
+.right {
+  flex: 1;
+  min-width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.right img {
+  max-width: 90%; /* scale down to fit */
+  max-height: 70vh; /* ensure it fits in viewport */
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.right img:hover {
+  transform: scale(1.02);
+}
+
+/* Responsive design */
+@media (max-width: 900px) {
+  .home {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 15px;
+    gap: 20px;
+  }
+
+  .mainHeading {
+    font-size: 1.7rem;
+  }
+
+  .typingText {
+    font-size: 1rem;
+  }
+
+  .tagline {
+    font-size: 0.9rem;
+  }
+
+  .button {
+    padding: 8px 20px;
+    font-size: 0.85rem;
+  }
+
+  .right img {
+    max-width: 80%;
+    max-height: 50vh;
+  }
+}
+
+/* Fade-in slide-up for main heading and tagline */
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mainHeading {
+  animation: fadeSlideUp 1s ease forwards;
+}
+
+.typingText {
+  width: 100%; /* container width */
+  max-width: 800px; /* optional */
+  font-family: "Roboto Mono", monospace;
+  font-weight: 300;
+  /* letter-spacing: 0.px; */
+  font-size: 1rem;
+  color: #077225;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 2px solid #3b82f6;
+  animation: typing 4s steps(50, end), blink 0.75s step-end infinite;
+}
+
+/* Typing effect */
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+  0%,
+  100% {
+    border-color: #3b82f6;
+  }
+}
+
+.tagline {
+  animation: fadeSlideUp 1.5s ease forwards;
+}

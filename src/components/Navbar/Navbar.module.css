@@ -1,0 +1,70 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1.5rem;
+  background: linear-gradient(90deg, #4e54c8, #8f5ae8);
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.profilePic {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.username {
+  font-weight: 500;
+}
+
+.dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background: #fff;
+  color: #333;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dropdown button:hover {
+  background-color: #f0f0f0;
+}
+
+.logoutButton {
+  color: #fff;
+  background-color: transparent;
+  border: none;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}

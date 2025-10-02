@@ -1,0 +1,123 @@
+/* Container for the whole form */
+.registerContainer {
+  max-height: 70vh;
+  max-width: 300px;
+  margin: 90px auto;
+  padding: 20px;
+  padding-top: 5px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+  font-family: "Arial", sans-serif;
+  overflow-y: auto;
+}
+
+/* Heading */
+.heading {
+  text-align: center;
+  font-size: 17px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Error message */
+.errorMsg {
+  color: #ff4d4f;
+  font-size: 14px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* Form styling */
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Inputs */
+.inputField {
+  padding: 8px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.inputField:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+/* Submit button */
+.submitBtn {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submitBtn:hover {
+  background-color: #0056b3;
+}
+
+/* Bottom login link */
+.loginText {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.loginText a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.loginText a:hover {
+  text-decoration: underline;
+}
+
+/* Role selection container */
+.roleSelector {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Label styling */
+.roleSelector label {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+/* Select dropdown styling */
+.roleSelector select {
+  padding: 8px 12px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: border 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+/* Hover effect for select */
+.roleSelector select:hover {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+/* Focus effect for select */
+.roleSelector select:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}

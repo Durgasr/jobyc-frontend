@@ -1,0 +1,5 @@
+@media (min-width: 600px) {
+  .jobLists {
+    display: flex;
+  }
+}

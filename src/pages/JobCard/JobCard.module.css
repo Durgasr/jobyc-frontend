@@ -1,0 +1,47 @@
+.jobCard {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px
+}
+
+.jobCard:hover {
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.jobCard h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.jobCard p {
+  color: #555;
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.jobCard a {
+  color: #1e90ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.jobCard a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive: make card full width on small screens */
+@media (max-width: 600px) {
+  .jobCard {
+    max-width: 90%;
+    padding: 15px;
+  }
+}

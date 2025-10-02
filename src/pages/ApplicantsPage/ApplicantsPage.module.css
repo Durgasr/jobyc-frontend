@@ -1,0 +1,125 @@
+.applicantsContainer {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.applicantsList {
+  flex: 1;
+  border-right: 1px solid #ccc;
+  padding-right: 1rem;
+}
+
+.applicantsList h4 {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #151158;
+}
+
+.applicantCard {
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.applicantCard:hover {
+  background: #f0f8ff;
+}
+
+.applicantCard p {
+  margin-bottom: 0.5rem;
+  color: #444;
+  font-size: 1rem;
+}
+
+p span {
+  color: #0d0828;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.applicantCard button {
+  background-color: #1e90ff;
+  color: #fff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+  margin-top: 8px;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+.applicantCard button:hover {
+  background-color: #0f6fd1;
+}
+
+.applicantCard button a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.applicantDetails {
+  flex: 1;
+  padding-left: 1rem;
+}
+
+.applicantDetails h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #222;
+}
+
+.applicantDetails p {
+  margin-bottom: 0.4rem;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  .applicantsContainer {
+    flex-direction: column;
+  }
+
+  .applicantsList {
+    border-right: none;
+    padding-right: 0;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 1rem;
+  }
+
+  .applicantDetails {
+    display: none;
+  }
+
+  .applicantDetailsMobile {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid #ddd;
+  }
+
+  .mobileButtons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+}
+
+@media (min-width: 769px) {
+  .applicantDetailsMobile {
+    display: none; /* hide below-buttons details on laptop/desktop */
+  }
+
+  .applicantDetails {
+    display: block; /* show right-side panel */
+  }
+}
