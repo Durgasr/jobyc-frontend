@@ -9,7 +9,6 @@ import styles from "./EditJob.module.css";
 const EditJob = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const controller = new AbortController();
 
   const [formData, setFormData] = useState({
     companyName: "",
@@ -37,6 +36,8 @@ const EditJob = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const fetchJob = async () => {
       try {
         const { data } = await axios.get(
