@@ -17,57 +17,28 @@ export const Register = () => {
     name: "",
     email: "",
     password: "",
-    skills: "",
-    resume: null, // <-- file stored here
-    experience: "",
-    location: "",
-    company: "",
-    position: "",
-    website: "",
   });
 
   const handleChange = (e) => {
-    const { name, value, files } = e.target;
-    if (files) {
-      setFormData({ ...formData, [name]: files[0] }); // store file object
-    } else {
-      setFormData({ ...formData, [name]: value });
-    }
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const data = new FormData();
-    data.append("role", role);
-    data.append("name", formData.name);
-    data.append("email", formData.email);
-    data.append("password", formData.password);
-
-    if (role === "jobseeker") {
-      data.append(
-        "skills",
-        formData.skills ? formData.skills.split(",").map((s) => s.trim()) : []
-      );
-      if (formData.resume) data.append("resume", formData.resume);
-      data.append("experience", formData.experience);
-      data.append("location", formData.location);
-    }
-
-    if (role === "recruiter") {
-      data.append("company", formData.company);
-      data.append("position", formData.position);
-      data.append("website", formData.website);
-    }
+    const data = {
+      name: formData.name,
+      email: formData.email,
+      password: formData.password,
+      role,
+    };
 
     try {
       const res = await axios.post(
-        "https://jobyc-backend.onrender.com/api/jobyc/user/register",
+        "http://localhost:3700/api/jobyc/user/register",
         data,
         {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
           withCredentials: true,
         }
       );
@@ -76,11 +47,11 @@ export const Register = () => {
       setUser(res.data.user);
       setLoading(false);
 
-      if (res.data.user.role === "jobseeker") navigate("/jobs");
-      else if (res.data.user.role === "recruiter") navigate("/dashboard");
+      // Redirect to profile setup page after registration
+      setTimeout(() => navigate("/profile-setup"), 100);
     } catch (err) {
       setLoading(false);
-      setError(err.response.data.error);
+      setError(err.response?.data?.error || "Registration failed");
     }
   };
 
@@ -94,7 +65,7 @@ export const Register = () => {
           {error && <p className={styles.errorMsg}>{error}</p>}
 
           <div className={styles.roleSelector}>
-            <label for="role-selector">Select Role: </label>
+            <label htmlFor="role-selector">Select Role: </label>
             <select
               value={role}
               id="role-selector"
@@ -135,71 +106,6 @@ export const Register = () => {
               onChange={handleChange}
               required
             />
-
-            {role === "jobseeker" && (
-              <>
-                <input
-                  className={styles.inputField}
-                  type="text"
-                  name="skills"
-                  placeholder="Skills (comma separated)"
-                  value={formData.skills}
-                  onChange={handleChange}
-                />
-                <input
-                  className={styles.inputField}
-                  type="file"
-                  name="resume"
-                  accept=".pdf,.doc,.docx"
-                  onChange={handleChange}
-                />
-                <input
-                  className={styles.inputField}
-                  type="Number"
-                  name="experience"
-                  placeholder="Experience in years"
-                  value={formData.experience}
-                  onChange={handleChange}
-                />
-                <input
-                  className={styles.inputField}
-                  type="text"
-                  name="location"
-                  placeholder="Location"
-                  value={formData.location}
-                  onChange={handleChange}
-                />
-              </>
-            )}
-
-            {role === "recruiter" && (
-              <>
-                <input
-                  className={styles.inputField}
-                  type="text"
-                  name="company"
-                  placeholder="Company Name"
-                  value={formData.company}
-                  onChange={handleChange}
-                />
-                <input
-                  className={styles.inputField}
-                  type="text"
-                  name="position"
-                  placeholder="Position"
-                  value={formData.position}
-                  onChange={handleChange}
-                />
-                <input
-                  className={styles.inputField}
-                  type="text"
-                  name="website"
-                  placeholder="Website"
-                  value={formData.website}
-                  onChange={handleChange}
-                />
-              </>
-            )}
 
             <button className={styles.submitBtn} type="submit">
               Register
