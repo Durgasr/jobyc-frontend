@@ -8,43 +8,65 @@ import { Layout } from "../../components/Layout/Layout";
 export const RecruiterDashboard = () => {
   const [jobs, setJobs] = useState([]);
   const [applicationsCount, setApplicationsCount] = useState({});
+  const [recruiter, setRecruiter] = useState(null);
   const navigate = useNavigate();
 
+  // ✅ Fetch jobs + recruiter data
   useEffect(() => {
-    const fetchJobs = async () => {
-      const res = await axios.get(
-        "https://jobyc-backend.onrender.com/api/jobyc/jobs/my",
-        {
-          withCredentials: true,
-        }
-      );
-      setJobs(res.data.jobs);
+    const fetchData = async () => {
+      try {
+        const [jobRes, userRes] = await Promise.all([
+          axios.get("http://localhost:3700/api/jobyc/jobs/my", {
+            withCredentials: true,
+          }),
+          axios.get("http://localhost:3700/api/jobyc/user/me", {
+            withCredentials: true,
+          }),
+        ]);
 
-      // Fetch applicant count for each job
-      const countPromises = res.data.jobs.map(async (job) => {
-        const countRes = await axios.get(
-          `https://jobyc-backend.onrender.com/api/jobyc/applications/${job._id}/count`,
-          { withCredentials: true }
-        );
-        return [job._id, countRes.data.count];
-      });
+        setJobs(jobRes.data.jobs);
+        setRecruiter(userRes.data.user);
 
-      const counts = Object.fromEntries(await Promise.all(countPromises));
-      setApplicationsCount(counts);
+        // Fetch applicant count for each job
+        const countPromises = jobRes.data.jobs.map(async (job) => {
+          const countRes = await axios.get(
+            `http://localhost:3700/api/jobyc/applications/${job._id}/count`,
+            { withCredentials: true }
+          );
+          return [job._id, countRes.data.count];
+        });
+
+        const counts = Object.fromEntries(await Promise.all(countPromises));
+        setApplicationsCount(counts);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      }
     };
 
-    fetchJobs();
+    fetchData();
   }, []);
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this job?")) return;
-    await axios.delete(
-      `https://jobyc-backend.onrender.com/api/jobyc/jobs/${id}`,
-      {
-        withCredentials: true,
-      }
-    );
+    await axios.delete(`http://localhost:3700/api/jobyc/jobs/${id}`, {
+      withCredentials: true,
+    });
     setJobs(jobs.filter((job) => job._id !== id));
+  };
+
+  // ✅ Handle Create Job
+  const handleCreateJob = () => {
+    if (!recruiter) return;
+
+    if (recruiter.progress < 80) {
+      alert(
+        "Please complete your profile (minimum 80%) before posting a job. Click OK to edit your profile."
+      );
+      navigate("/profile-setup");
+      return;
+    }
+
+    navigate("/create-job");
   };
 
   return (
@@ -52,9 +74,16 @@ export const RecruiterDashboard = () => {
       <Navbar />
       <div className={styles.container}>
         <h4 className={styles.title}>My Job Posts</h4>
-        <Link to="/create-job" className={styles.createLink}>
+
+        {/* ✅ replaced Link with button for progress check */}
+        <button
+          onClick={handleCreateJob}
+          className={styles.createLink}
+          style={{ cursor: "pointer" }}
+        >
           + Create New Job
-        </Link>
+        </button>
+
         <div>
           {jobs.length > 0 ? (
             jobs.map((job) => (
