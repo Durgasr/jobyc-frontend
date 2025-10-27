@@ -11,7 +11,7 @@ export const UserProvider = ({ children }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("https://jobyc-backend.onrender.com/api/jobyc/user/me", {
+        const res = await axios.get("https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/user/me", {
           withCredentials: true, 
         });
         setUser(res.data.user);
