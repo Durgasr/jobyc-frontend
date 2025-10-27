@@ -11,19 +11,19 @@ export const Navbar = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log(user);
-
-    if (user && user.profileImage) {
-      setUserImg(`http://localhost:3700${user.profileImage}`);
+    if (user && user.profileImage !== "" && user.profileImage !== "null" && user.profileImage != undefined) {
+      setUserImg(
+        `https://jobyc-4ad8ff06194c.herokuapp.com${user.profileImage}`
+      );
     } else {
-      setUserImg("./user.jpg");
+      setUserImg("/user.jpg");
     }
   }, [user]);
 
   const handleLogout = async () => {
     try {
       await axios.post(
-        "http://localhost:3700/api/jobyc/user/logout",
+        "https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/user/logout",
         {},
         { withCredentials: true }
       );
@@ -35,7 +35,6 @@ export const Navbar = () => {
     }
   };
 
-  // console.log(userImg);
 
   return (
     <nav className={styles.navbar}>
