@@ -1,8 +1,8 @@
 /* Container for the whole form */
 .registerContainer {
-  max-height: 70vh;
+  /* max-height: 70vh; */
   max-width: 300px;
-  margin: 90px auto;
+  margin: 38px auto;
   padding: 20px;
   padding-top: 5px;
   background-color: #f9f9f9;
@@ -10,6 +10,7 @@
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
   font-family: "Arial", sans-serif;
   overflow-y: auto;
+  /* height: 67vh; */
 }
 
 /* Heading */
