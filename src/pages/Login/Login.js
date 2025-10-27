@@ -26,7 +26,7 @@ export const Login = () => {
 
     try {
       const res = await axios.post(
-        "https://jobyc-backend.onrender.com/api/jobyc/user/login",
+        "https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/user/login",
         formData,
         { withCredentials: true } // important to send/receive cookie
       );
@@ -39,7 +39,7 @@ export const Login = () => {
       else if (res.data.user.role === "recruiter") navigate("/dashboard");
     } catch (err) {
       setLoading(false);
-      setError(err.response.data.error);
+      setError(err.response?.data?.error || "Login failed");
     }
   };
 
@@ -68,9 +68,14 @@ export const Login = () => {
             required
             className={styles.formInput}
           />
-          <button type="submit" className={styles.formButton}>
-            Login
-          </button>
+          <div className={styles.loginForgot}>
+            <button type="submit" className={styles.formButton}>
+              Login
+            </button>
+          </div>
+          <p className={styles.forgotPassword}>
+            <Link to="/forgot-password">Forgot password?</Link>
+          </p>
         </form>
         <div className={styles.loginFooter}>
           <p>

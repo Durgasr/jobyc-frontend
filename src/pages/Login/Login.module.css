@@ -1,7 +1,7 @@
 .formContainer {
   width: 100%;
   max-width: 300px;
-  margin:100px auto;
+  margin: 50px auto;
   padding: 20px;
   background: #fff;
   border-radius: 10px;
@@ -47,8 +47,9 @@
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
 }
 
-.formButton {
-  padding: 10px;
+.loginForgot button {
+  width: 30%;
+  padding: 0px 8px;
   font-size: 14px;
   border: none;
   border-radius: 8px;
@@ -56,6 +57,7 @@
   color: #fff;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-top: 15px;
 }
 
 .formButton:hover {
@@ -74,5 +76,47 @@
 }
 
 .loginFooter a:hover {
+  text-decoration: underline;
+}
+
+.loginForgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* keeps button and link aligned nicely */
+  color: #007bff;
+  text-decoration: none;
+  margin-top: 10px;
+  height: auto; /* remove the fixed height */
+}
+
+.loginForgot button {
+  padding: 8px 16px; /* balanced padding */
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  background: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.loginForgot button:hover {
+  background: #0056b3;
+}
+
+.forgotPassword {
+  text-align: right;
+  width: 100%;
+  margin-top: 8px;
+  
+}
+
+.forgotPassword a {
+  color: #007bff;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+.forgotPassword a:hover {
   text-decoration: underline;
 }
