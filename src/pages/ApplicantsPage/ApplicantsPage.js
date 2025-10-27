@@ -12,7 +12,7 @@ export const ApplicantsPage = () => {
   useEffect(() => {
     const fetchApplicants = async () => {
       const res = await axios.get(
-        `https://jobyc-backend.onrender.com/api/jobyc/applications/${jobId}/applicants`,
+        `https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/applications/${jobId}/applicants`,
         { withCredentials: true }
       );
       setApplicants(res.data.applicants);
@@ -24,13 +24,31 @@ export const ApplicantsPage = () => {
 
   async function handleResume(applicant, applicationId) {
     await axios.get(
-      `https://jobyc-backend.onrender.com/api/jobyc/applications/${applicationId}/view-resume`,
+      `https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/applications/${applicationId}/view-resume`,
       { withCredentials: true }
     );
   }
 
-  const toggleExpand = (id) => {
+  const toggleExpand = async (id) => {
     setExpandedApplicantId(expandedApplicantId === id ? null : id);
+    await axios.get(
+      `https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/applications/${id}/view-profile`,
+      { withCredentials: true }
+    );
+  };
+
+  const renderExperience = (experienceArray) => {
+    if (!Array.isArray(experienceArray) || experienceArray.length === 0) {
+      return "No experience";
+    }
+    return experienceArray
+      .map(
+        (exp) =>
+          `${exp.position || ""} at ${exp.company || ""} (${
+            exp.startDate || ""
+          } - ${exp.endDate || ""})`
+      )
+      .join(", ");
   };
 
   return (
@@ -48,18 +66,18 @@ export const ApplicantsPage = () => {
             </p>
 
             <div className={styles.mobileButtons}>
-              <button
-                onClick={() => toggleExpand(app._id)}
-              >
-                {expandedApplicantId === app._id ? "Hide Profile" : "View Profile"}
+              <button onClick={() => toggleExpand(app._id)}>
+                {expandedApplicantId === app._id
+                  ? "Hide Profile"
+                  : "View Profile"}
               </button>
 
               <button>
                 <a
-                  href={`https://jobyc-backend.onrender.com/${app.applicant.resumeUrl}`}
+                  href={`https://jobyc-4ad8ff06194c.herokuapp.com${app.applicant.resumeUrl}`}
                   target="_blank"
                   onClick={(e) => {
-                    e.stopPropagation(); // prevent toggling
+                    e.stopPropagation();
                     handleResume(app.applicant, app._id);
                   }}
                   rel="noreferrer"
@@ -82,8 +100,8 @@ export const ApplicantsPage = () => {
                   <span>Skills:</span> {app.applicant.skills}
                 </p>
                 <p>
-                  <span>Experience:</span> {app.applicant.experience}{" "}
-                  {app.applicant.experience > 1 ? "Years" : "Year"}
+                  <span>Experience:</span>{" "}
+                  {renderExperience(app.applicant.experience)}
                 </p>
               </div>
             )}
@@ -92,51 +110,46 @@ export const ApplicantsPage = () => {
       </div>
 
       <div className={styles.applicantDetails}>
-        {expandedApplicantId && (
+        {expandedApplicantId ? (
           <div>
             <h3>
               {
-                applicants.find((a) => a._id === expandedApplicantId)
-                  ?.applicant.name
+                applicants.find((a) => a._id === expandedApplicantId)?.applicant
+                  .name
               }
             </h3>
             <p>
               <span>Email:</span>{" "}
               {
-                applicants.find((a) => a._id === expandedApplicantId)
-                  ?.applicant.email
+                applicants.find((a) => a._id === expandedApplicantId)?.applicant
+                  .email
               }
             </p>
             <p>
               <span>Location:</span>{" "}
               {
-                applicants.find((a) => a._id === expandedApplicantId)
-                  ?.applicant.location
+                applicants.find((a) => a._id === expandedApplicantId)?.applicant
+                  .location
               }
             </p>
             <p>
               <span>Skills:</span>{" "}
               {
-                applicants.find((a) => a._id === expandedApplicantId)
-                  ?.applicant.skills
+                applicants.find((a) => a._id === expandedApplicantId)?.applicant
+                  .skills
               }
             </p>
             <p>
               <span>Experience:</span>{" "}
-              {
-                applicants.find((a) => a._id === expandedApplicantId)
-                  ?.applicant.experience
-              }{" "}
-              {
-                applicants.find((a) => a._id === expandedApplicantId)
-                  ?.applicant.experience > 1
-                  ? "Years"
-                  : "Year"
-              }
+              {renderExperience(
+                applicants.find((a) => a._id === expandedApplicantId)?.applicant
+                  .experience
+              )}
             </p>
           </div>
+        ) : (
+          <p>Select an applicant to see details</p>
         )}
-        {!expandedApplicantId && <p>Select an applicant to see details</p>}
       </div>
     </div>
   );
