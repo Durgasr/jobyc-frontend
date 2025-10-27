@@ -2,13 +2,14 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 100vh; 
+  min-height: 90vh; 
   padding: 20px 50px;
   background: linear-gradient(to right, #eef2ff, #e0e7ff);
   color: #1f2937;
   gap: 30px;
   flex-wrap: wrap;
   box-sizing: border-box;
+  background-size: cover;
 }
 
 /* Left section */
