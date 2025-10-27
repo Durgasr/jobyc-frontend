@@ -1,16 +1,29 @@
-.pageWrapper {
-  min-height: 100vh; /* full height always */
+/* .pageWrapper {
+  min-height: 100vh;
   background: linear-gradient(to right, #eef2ff, #e0e7ff);
-  padding: 20px;
+  padding: 10px;
   box-sizing: border-box;
   height: 100vh;
-}
+  padding-top: 60px;
+  background-size: cover;
+} */
 
-/* Layout.module.css */
-.layout {
-  min-height: 100vh; /* fill full screen */
-  display: flex;
-  flex-direction: column; /* stack children */
-  padding: 2rem;
+
+
+ .pageWrapper {
+  min-height: 100vh; 
+  margin: 0; 
+  background: linear-gradient(to right, #eef2ff, #e0e7ff);
+  /* padding: 20px; */
   box-sizing: border-box;
-}
+  /* padding-top:60px; */
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center;
+  overflow: auto; 
+  height:100vh
+} 
+
+
+
+
