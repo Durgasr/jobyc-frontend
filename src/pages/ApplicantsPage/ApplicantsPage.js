@@ -51,11 +51,12 @@ export const ApplicantsPage = () => {
       .join(", ");
   };
 
+
   return (
     <div className={styles.applicantsContainer}>
       <div className={styles.applicantsList}>
         <h4>
-          Applicants of {jobDetails?.designation || "Loading..."} -{" "}
+          Applicants of {jobDetails?.designation || "Loading..."} - {" "}
           {jobDetails?.companyName || "Loading..."}
         </h4>
         {applicants.length === 0 && <p>No applicants yet.</p>}
@@ -100,8 +101,8 @@ export const ApplicantsPage = () => {
                   <span>Skills:</span> {app.applicant.skills}
                 </p>
                 <p>
-                  <span>Experience:</span>{" "}
-                  {renderExperience(app.applicant.experience)}
+                  <span>Total Experience:</span> {app.applicant.totalExperience}{" "}
+                  {app.applicant.totalExperience <= 1 ? "Year" : "Years"}
                 </p>
               </div>
             )}
@@ -140,12 +141,23 @@ export const ApplicantsPage = () => {
               }
             </p>
             <p>
+              <span>Total Expereince:</span>{" "}
+              {
+                applicants.find((a) => a._id === expandedApplicantId)?.applicant
+                  .totalExperience
+              }{" "}
+              {applicants.find((a) => a._id === expandedApplicantId)?.applicant
+                .totalExperience <= 1
+                ? "Year"
+                : "Years"}
+            </p>
+            {/* <p>
               <span>Experience:</span>{" "}
               {renderExperience(
                 applicants.find((a) => a._id === expandedApplicantId)?.applicant
                   .experience
               )}
-            </p>
+            </p> */}
           </div>
         ) : (
           <p>Select an applicant to see details</p>
