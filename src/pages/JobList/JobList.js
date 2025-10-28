@@ -3,7 +3,7 @@ import axios from "axios";
 import JobCard from "../JobCard/JobCard";
 import { Layout } from "../../components/Layout/Layout";
 import { Navbar } from "../../components/Navbar/Navbar";
-import styles from "./JobList.module.css"
+import styles from "./JobList.module.css";
 
 const JobList = () => {
   const [jobs, setJobs] = useState([]);
@@ -13,7 +13,7 @@ const JobList = () => {
     const fetchJobs = async () => {
       try {
         const { data } = await axios.get(
-          "https://jobyc-backend.onrender.com/api/jobyc/jobs",
+          "https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/jobs",
           { withCredentials: true }
         );
         setJobs(data.jobs);
@@ -31,11 +31,15 @@ const JobList = () => {
   return (
     <Layout>
       <Navbar />
-      <div className={styles.jobLists}>
-        {jobs.map((job) => (
-          <JobCard key={job._id} job={job} />
-        ))}
-      </div>
+      {jobs.length === 0 ? (
+        <p>No jobs right now</p>
+      ) : (
+        <div className={styles.jobLists}>
+          {jobs.map((job) => (
+            <JobCard key={job._id} job={job} />
+          ))}
+        </div>
+      )}
     </Layout>
   );
 };
