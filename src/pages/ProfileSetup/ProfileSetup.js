@@ -17,6 +17,7 @@ const ProfileSetup = () => {
     about: "",
     location: "",
     skills: "",
+    totalExperience: 0,
     experience: [
       {
         company: "",
@@ -49,12 +50,9 @@ const ProfileSetup = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get(
-          "https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/user/me",
-          {
-            withCredentials: true,
-          }
-        );
+        const res = await axios.get("https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/user/me", {
+          withCredentials: true,
+        });
         setUser(res.data.user);
 
         // Pre-fill form data if editing existing profile
@@ -64,6 +62,7 @@ const ProfileSetup = () => {
           position: res.data.user.position || "",
           linkedinRecruiter: res.data.user.linkedin || "",
           resume: res.data.user.resumeUrl || null,
+          totalExperience: res.data.user.totalExperience || 0,
           skills:
             Array.isArray(res.data.user.skills) &&
             res.data.user.skills.length > 0
@@ -88,6 +87,7 @@ const ProfileSetup = () => {
             "title",
             "phoneNumber",
             "skills",
+            "totalExperience",
             "experience",
             "resume",
             "location",
@@ -203,13 +203,24 @@ const ProfileSetup = () => {
                   }deg, #ddd 0deg)`,
                 }}
               >
-                <img
+                {/* <img
                   src={
                     formData.profileImage &&
                     formData.profileImage !== "null" &&
                     formData.profileImage !== ""
                       ? `https://jobyc-4ad8ff06194c.herokuapp.com${formData.profileImage}`
                       : "https://cdn-icons-png.flaticon.com/512/847/847969.png"
+                  }
+                  alt="Profile"
+                  className={styles.pfAvatar}
+                /> */}
+                <img
+                  src={
+                    formData.profileImage instanceof File
+                      ? URL.createObjectURL(formData.profileImage) // Preview newly selected file
+                      : formData.profileImage // Backend URL
+                      ? `https://jobyc-4ad8ff06194c.herokuapp.com${formData.profileImage}`
+                      : "https://cdn-icons-png.flaticon.com/512/847/847969.png" // Fallback if empty
                   }
                   alt="Profile"
                   className={styles.pfAvatar}
@@ -284,6 +295,16 @@ const ProfileSetup = () => {
                     value={formData.skills}
                     onChange={handleChange}
                     placeholder="React, Node.js, MongoDB"
+                  />
+                </div>
+                <div className={styles.pfRow}>
+                  <label>Total Experience</label>
+                  <input
+                    type="number"
+                    name="totalExperience"
+                    value={formData.totalExperience}
+                    onChange={handleChange}
+                    placeholder="experience in number of years"
                   />
                 </div>
 
