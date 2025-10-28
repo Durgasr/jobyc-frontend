@@ -16,10 +16,10 @@ export const RecruiterDashboard = () => {
     const fetchData = async () => {
       try {
         const [jobRes, userRes] = await Promise.all([
-          axios.get("http://localhost:3700/api/jobyc/jobs/my", {
+          axios.get("https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/jobs/my", {
             withCredentials: true,
           }),
-          axios.get("http://localhost:3700/api/jobyc/user/me", {
+          axios.get("https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/user/me", {
             withCredentials: true,
           }),
         ]);
@@ -30,7 +30,7 @@ export const RecruiterDashboard = () => {
         // Fetch applicant count for each job
         const countPromises = jobRes.data.jobs.map(async (job) => {
           const countRes = await axios.get(
-            `http://localhost:3700/api/jobyc/applications/${job._id}/count`,
+            `https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/applications/${job._id}/count`,
             { withCredentials: true }
           );
           return [job._id, countRes.data.count];
@@ -48,7 +48,7 @@ export const RecruiterDashboard = () => {
 
   const handleDelete = async (id) => {
     if (!window.confirm("Are you sure you want to delete this job?")) return;
-    await axios.delete(`http://localhost:3700/api/jobyc/jobs/${id}`, {
+    await axios.delete(`https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/jobs/${id}`, {
       withCredentials: true,
     });
     setJobs(jobs.filter((job) => job._id !== id));
