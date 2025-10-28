@@ -1,15 +1,11 @@
 .companyCard {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 12px;
-  margin: 50px auto;
-  max-width: 600px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  box-sizing: border-box;
-  height: 80vh; 
-  overflow-y: auto; 
+  max-width: 700px;
+  margin: 20px auto;
   padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #fff;
+  margin-top: 60px;
 }
 
 .companyCard:hover {
@@ -19,7 +15,7 @@
 .companyCard h2 {
   font-size: 1.5rem;
   margin-bottom: 15px;
-  color: #333;
+  color: #4907b4;
 }
 
 h4 {
@@ -55,7 +51,7 @@ h4 {
 }
 
 .companyCard button {
-  background-color: #1e90ff;
+  background-color: #0e9a66;
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -63,15 +59,51 @@ h4 {
   cursor: pointer;
   font-size: 1rem;
   transition: background 0.3s ease;
+  width: 180px;
 }
 
 .companyCard button:hover {
-  background-color: #0f6fd1;
+  background-color: #10804c;
 }
 
 .companyCard button:disabled {
   background-color: #aaa;
   cursor: not-allowed;
+}
+
+.recruiterSection {
+  margin-top: 2rem;
+  background: #f9fafb;
+  padding: 1.2rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  margin-bottom: 10px;
+}
+
+.recruiterInfo {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.2rem;
+  margin-top: 1rem;
+}
+
+.recruiterImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ddd;
+}
+
+.websiteLink {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.websiteLink:hover {
+  color: #0056b3;
+  text-decoration: underline;
 }
 
 @media (max-width: 600px) {
@@ -90,5 +122,32 @@ h4 {
 
   .aboutSection p {
     font-size: 0.95rem;
+  }
+
+  .recruiterSection {
+    padding: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .recruiterInfo {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .recruiterImage {
+    width: 70px;
+    height: 70px;
+  }
+
+  .recruiterSection p {
+    font-size: 0.95rem;
+    margin-bottom: 6px;
+  }
+
+  .websiteLink {
+    word-break: break-all;
+    font-size: 0.9rem;
   }
 }
