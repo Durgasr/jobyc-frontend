@@ -14,24 +14,14 @@ const CreateJob = () => {
     category: "",
     designation: "",
     description: "",
-    location: "",
+    minimumExperienceRequired: null,
     salary: "",
     totalPositions: "",
     skills: "",
-    applyBy: "",
+    location: "",
   });
 
   const categories = ["Tech", "Non Tech"];
-  const designations = [
-    "HR",
-    "SDE",
-    "DevOps",
-    "MERN Developer",
-    "MEAN Developer",
-    "Front-End Developer",
-    "Back-End Developer",
-    "Full-Stack Developer",
-  ];
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -49,18 +39,13 @@ const CreateJob = () => {
           : [],
       };
 
-      await axios.post(
-        "https://jobyc-backend.onrender.com/api/jobyc/jobs",
-        payload,
-        {
-          withCredentials: true,
-        }
-      );
+      await axios.post("https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/jobs", payload, {
+        withCredentials: true,
+      });
 
       alert("Job posted successfully!");
       navigate("/dashboard"); // recruiter dashboard
     } catch (err) {
-      console.error(err);
       alert(err.response?.data?.message || "Failed to create job post");
     }
   };
@@ -96,20 +81,14 @@ const CreateJob = () => {
             ))}
           </select>
 
-          <select
+          <input
             name="designation"
             value={formData.designation}
             onChange={handleChange}
             required
             className={styles.input}
-          >
-            <option value="">Select Designation</option>
-            {designations.map((des) => (
-              <option key={des} value={des}>
-                {des}
-              </option>
-            ))}
-          </select>
+            placeholder="Desingation"
+          />
 
           <textarea
             name="description"
@@ -121,10 +100,10 @@ const CreateJob = () => {
           />
 
           <input
-            type="text"
-            name="location"
-            placeholder="Location"
-            value={formData.location}
+            type="number"
+            name="minimumExperienceRequired"
+            placeholder="Experience in years"
+            value={formData.minimumExperienceRequired}
             onChange={handleChange}
             required
             className={styles.input}
@@ -161,13 +140,15 @@ const CreateJob = () => {
           />
 
           <input
-            type="date"
-            name="applyBy"
-            value={formData.applyBy}
+            type="text"
+            name="location"
+            placeholder="Location"
+            value={formData.location}
             onChange={handleChange}
             required
             className={styles.input}
           />
+
           <div>
             <button type="submit" className={styles.button}>
               Create Job

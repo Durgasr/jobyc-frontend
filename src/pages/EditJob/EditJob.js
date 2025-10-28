@@ -12,26 +12,18 @@ const EditJob = () => {
 
   const [formData, setFormData] = useState({
     companyName: "",
-    category: "Tech",
-    designation: "HR",
+    category: "",
+    designation: "",
     description: "",
-    location: "",
-    salary: 0,
-    totalPositions: 1,
+    minimumExperienceRequired: null,
+    salary: "",
+    totalPositions: "",
     skills: "",
+    location: "",
   });
 
   const categories = ["Tech", "Non Tech"];
-  const designations = [
-    "HR",
-    "SDE",
-    "DevOps",
-    "MERN Developer",
-    "MEAN Developer",
-    "Front-End Developer",
-    "Back-End Developer",
-    "Full-Stack Developer",
-  ];
+  const designations = "";
 
   const [loading, setLoading] = useState(true);
 
@@ -41,7 +33,7 @@ const EditJob = () => {
     const fetchJob = async () => {
       try {
         const { data } = await axios.get(
-          `https://jobyc-backend.onrender.com/api/jobyc/jobs/${id}`,
+          `https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/jobs/${id}`,
           { withCredentials: true }
         );
 
@@ -51,14 +43,15 @@ const EditJob = () => {
           : data.job.skills || "";
 
         setFormData({
-          companyName: data.job.companyName || "",
-          description: data.job.description || "",
-          category: data.job.category || "Tech",
-          designation: data.job.designation || "HR",
-          location: data.job.location || "",
-          salary: data.job.salary || 0,
-          totalPositions: data.job.totalPositions || 1,
+          companyName: data.job.companyName,
+          description: data.job.description,
+          category: data.job.category,
+          designation: data.job.designation,
+          minimumExperienceRequired: data.job.minimumExperienceRequired,
+          salary: data.job.salary,
+          totalPositions: data.job.totalPositions,
           skills: skillsString,
+          location: data.job.location,
         });
 
         setLoading(false);
@@ -88,13 +81,9 @@ const EditJob = () => {
         skills: formData.skills.split(",").map((s) => s.trim()), // string → array
       };
 
-      await axios.put(
-        `https://jobyc-backend.onrender.com/api/jobyc/jobs/${id}`,
-        jobData,
-        {
-          withCredentials: true,
-        }
-      );
+      await axios.put(`https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/jobs/${id}`, jobData, {
+        withCredentials: true,
+      });
 
       alert("Job updated successfully!");
       navigate("/dashboard");
@@ -137,20 +126,14 @@ const EditJob = () => {
             ))}
           </select>
 
-          <select
+          <input
             name="designation"
             value={formData.designation}
             onChange={handleChange}
             required
             className={styles.input}
-          >
-            <option value="">Select Designation</option>
-            {designations.map((des) => (
-              <option key={des} value={des}>
-                {des}
-              </option>
-            ))}
-          </select>
+            placeholder="Desingation"
+          />
 
           <textarea
             name="description"
@@ -162,10 +145,10 @@ const EditJob = () => {
           />
 
           <input
-            type="text"
-            name="location"
-            placeholder="Location"
-            value={formData.location}
+            type="number"
+            name="minimumExperienceRequired"
+            placeholder="Experience in years"
+            value={formData.minimumExperienceRequired}
             onChange={handleChange}
             required
             className={styles.input}
@@ -202,9 +185,10 @@ const EditJob = () => {
           />
 
           <input
-            type="date"
-            name="applyBy"
-            value={formData.applyBy}
+            type="text"
+            name="location"
+            placeholder="Location"
+            value={formData.location}
             onChange={handleChange}
             required
             className={styles.input}

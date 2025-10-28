@@ -1,4 +1,4 @@
-.container {
+/* .container {
   max-height: 70vh;
   max-width: 400px;
   margin: 3rem auto;
@@ -9,6 +9,15 @@
   text-align: center;
   margin-top: 100px;
   overflow-y: auto;
+} */
+
+.container {
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background: #fff;
 }
 
 .title {
@@ -16,6 +25,7 @@
   margin-bottom: 1rem;
   color: #1e3a8a;
   font-weight: 500;
+  text-align: center;
 }
 
 .form {
