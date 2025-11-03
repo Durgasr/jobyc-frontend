@@ -15,7 +15,7 @@ const ForgotPassword = () => {
     setError("");
     try {
       const res = await axios.post(
-        "https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/user/forgot-password",
+        "http://localhost:3700/api/jobyc/user/forgot-password",
         { email },
         { withCredentials: true }
       );

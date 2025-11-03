@@ -25,7 +25,7 @@ const ResetPassword = () => {
 
     try {
       const res = await axios.put(
-        `https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/user/reset-password/${token}`,
+        `http://localhost:3700/api/jobyc/user/reset-password/${token}`,
         { password, confirmPassword },
         { withCredentials: true }
       );

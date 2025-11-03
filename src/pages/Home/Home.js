@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Navbar } from "../../components/Navbar/Navbar.js";
 import styles from "./Home.module.css";
+import { Layout } from "../../components/Layout/Layout.js";
 
 export const Home = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ export const Home = () => {
   };
 
   return (
-    <>
+    <Layout>
       <Navbar />
       <div className={styles.home}>
         <div className={styles.left}>
@@ -35,6 +36,6 @@ export const Home = () => {
           <img src="/banner.png" alt="banner" />
         </div>
       </div>
-    </>
+    </Layout>
   );
 };

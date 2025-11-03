@@ -36,7 +36,7 @@ export const Register = () => {
 
     try {
       const res = await axios.post(
-        "https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/user/register",
+        "http://localhost:3700/api/jobyc/user/register",
         data,
         {
           withCredentials: true,

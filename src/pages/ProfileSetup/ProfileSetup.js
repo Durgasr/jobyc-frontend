@@ -50,7 +50,7 @@ const ProfileSetup = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const res = await axios.get("https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/user/me", {
+        const res = await axios.get("http://localhost:3700/api/jobyc/user/me", {
           withCredentials: true,
         });
         setUser(res.data.user);
@@ -167,7 +167,7 @@ const ProfileSetup = () => {
       });
 
       const res = await axios.put(
-        "https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/profile/setup",
+        "http://localhost:3700/api/jobyc/profile/setup",
         data,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -208,7 +208,7 @@ const ProfileSetup = () => {
                     formData.profileImage &&
                     formData.profileImage !== "null" &&
                     formData.profileImage !== ""
-                      ? `https://jobyc-4ad8ff06194c.herokuapp.com${formData.profileImage}`
+                      ? `http://localhost:3700${formData.profileImage}`
                       : "https://cdn-icons-png.flaticon.com/512/847/847969.png"
                   }
                   alt="Profile"
@@ -219,7 +219,7 @@ const ProfileSetup = () => {
                     formData.profileImage instanceof File
                       ? URL.createObjectURL(formData.profileImage) // Preview newly selected file
                       : formData.profileImage // Backend URL
-                      ? `https://jobyc-4ad8ff06194c.herokuapp.com${formData.profileImage}`
+                      ? `http://localhost:3700${formData.profileImage}`
                       : "https://cdn-icons-png.flaticon.com/512/847/847969.png" // Fallback if empty
                   }
                   alt="Profile"
@@ -435,7 +435,7 @@ const ProfileSetup = () => {
                     <>
                       {typeof formData.resume === "string" ? (
                         <a
-                          href={`https://jobyc-4ad8ff06194c.herokuapp.com${formData.resume}`}
+                          href={`http://localhost:3700${formData.resume}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className={styles.pfResumeLink}
