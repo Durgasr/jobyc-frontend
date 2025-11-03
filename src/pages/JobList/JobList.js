@@ -13,7 +13,7 @@ const JobList = () => {
     const fetchJobs = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:3700/api/jobyc/jobs",
+          "https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/jobs",
           { withCredentials: true }
         );
         setJobs(data.jobs);

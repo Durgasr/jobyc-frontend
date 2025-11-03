@@ -14,7 +14,7 @@ export const ApplicantsPage = () => {
   useEffect(() => {
     const fetchApplicants = async () => {
       const res = await axios.get(
-        `http://localhost:3700/api/jobyc/applications/${jobId}/applicants`,
+        `https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/applications/${jobId}/applicants`,
         { withCredentials: true }
       );
       setApplicants(res.data.applicants);
@@ -26,7 +26,7 @@ export const ApplicantsPage = () => {
 
   async function handleResume(applicant, applicationId) {
     await axios.get(
-      `http://localhost:3700/api/jobyc/applications/${applicationId}/view-resume`,
+      `https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/applications/${applicationId}/view-resume`,
       { withCredentials: true }
     );
   }
@@ -34,7 +34,7 @@ export const ApplicantsPage = () => {
   const toggleExpand = async (id) => {
     setExpandedApplicantId(expandedApplicantId === id ? null : id);
     await axios.get(
-      `http://localhost:3700/api/jobyc/applications/${id}/view-profile`,
+      `https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/applications/${id}/view-profile`,
       { withCredentials: true }
     );
   };
@@ -78,7 +78,7 @@ export const ApplicantsPage = () => {
 
                 <button>
                   <a
-                    href={`http://localhost:3700${app.applicant.resumeUrl}`}
+                    href={`https://jobyc-4ad8ff06194c.herokuapp.com${app.applicant.resumeUrl}`}
                     target="_blank"
                     onClick={(e) => {
                       e.stopPropagation();

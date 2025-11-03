@@ -39,7 +39,7 @@ const CreateJob = () => {
           : [],
       };
 
-      await axios.post("http://localhost:3700/api/jobyc/jobs", payload, {
+      await axios.post("https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/jobs", payload, {
         withCredentials: true,
       });
 

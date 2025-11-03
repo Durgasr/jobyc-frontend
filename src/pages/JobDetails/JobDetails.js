@@ -19,7 +19,7 @@ export const JobDetails = () => {
     const fetchJobDetails = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:3700/api/jobyc/jobs/${jobId}`,
+          `https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/jobs/${jobId}`,
           { withCredentials: true }
         );
         setJob(res.data.job);
@@ -28,7 +28,7 @@ export const JobDetails = () => {
         // ✅ Check if already applied
         if (user?.role === "jobseeker") {
           const appliedRes = await axios.get(
-            `http://localhost:3700/api/jobyc/applications/check/${jobId}`,
+            `https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/applications/check/${jobId}`,
             { withCredentials: true }
           );
           setApplied(appliedRes.data.applied);
@@ -36,7 +36,7 @@ export const JobDetails = () => {
         console.log(res.data.job);
 
         const scoreRes = await axios.post(
-          "http://localhost:3700/api/jobyc/jobs/match-score",
+          "https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/jobs/match-score",
           { description: res.data.job.description },
           { withCredentials: true }
         );
@@ -56,7 +56,7 @@ export const JobDetails = () => {
   //   const fetchMatchScore = async () => {
   //     try {
   //       const res = await axios.post(
-  //         "http://localhost:3700/api/jobyc/jobs/match-score",
+  //         "https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/jobs/match-score",
   //         { description: job.description },
   //         { withCredentials: true }
   //       );
@@ -79,7 +79,7 @@ export const JobDetails = () => {
       }
 
       await axios.post(
-        `http://localhost:3700/api/jobyc/applications/apply/${jobId}`,
+        `https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/applications/apply/${jobId}`,
         {},
         { withCredentials: true }
       );
@@ -215,7 +215,7 @@ export const JobDetails = () => {
                 recruiter?.profileImage &&
                 recruiter.profileImage !== "null" &&
                 recruiter.profileImage !== ""
-                  ? `http://localhost:3700${recruiter.profileImage}`
+                  ? `https://jobyc-4ad8ff06194c.herokuapp.com${recruiter.profileImage}`
                   : "http://localhost:3000/user.jpg"
               }
               alt={recruiter?.name || "Recruiter"}

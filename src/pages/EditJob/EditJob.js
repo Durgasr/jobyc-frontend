@@ -33,7 +33,7 @@ const EditJob = () => {
     const fetchJob = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:3700/api/jobyc/jobs/${id}`,
+          `https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/jobs/${id}`,
           { withCredentials: true }
         );
 
@@ -81,7 +81,7 @@ const EditJob = () => {
         skills: formData.skills.split(",").map((s) => s.trim()), // string → array
       };
 
-      await axios.put(`http://localhost:3700/api/jobyc/jobs/${id}`, jobData, {
+      await axios.put(`https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/jobs/${id}`, jobData, {
         withCredentials: true,
       });
 
