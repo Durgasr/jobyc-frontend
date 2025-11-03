@@ -19,7 +19,7 @@ export const JobDetails = () => {
     const fetchJobDetails = async () => {
       try {
         const res = await axios.get(
-          `https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/jobs/${jobId}`,
+          `http://localhost:3700/api/jobyc/jobs/${jobId}`,
           { withCredentials: true }
         );
         setJob(res.data.job);
@@ -28,18 +28,46 @@ export const JobDetails = () => {
         // ✅ Check if already applied
         if (user?.role === "jobseeker") {
           const appliedRes = await axios.get(
-            `https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/applications/check/${jobId}`,
+            `http://localhost:3700/api/jobyc/applications/check/${jobId}`,
             { withCredentials: true }
           );
           setApplied(appliedRes.data.applied);
         }
+        console.log(res.data.job);
+
+        const scoreRes = await axios.post(
+          "http://localhost:3700/api/jobyc/jobs/match-score",
+          { description: res.data.job.description },
+          { withCredentials: true }
+        );
+        setJob((prev) => ({ ...prev, matchScore: scoreRes.data.matchScore }));
       } catch (err) {
         console.error(err);
       }
     };
 
     fetchJobDetails();
-  }, [jobId, user]);
+  }, [jobId]);
+
+  // useEffect(() => {
+  //   console.log(job);
+  //   if (!job || !job.description) return;
+
+  //   const fetchMatchScore = async () => {
+  //     try {
+  //       const res = await axios.post(
+  //         "http://localhost:3700/api/jobyc/jobs/match-score",
+  //         { description: job.description },
+  //         { withCredentials: true }
+  //       );
+  //       setJob((prev) => ({ ...prev, matchScore: res.data.matchScore }));
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchMatchScore();
+  // }, [job, user]);
+
   const handleApply = async () => {
     try {
       // ✅ Check profile progress before applying
@@ -51,7 +79,7 @@ export const JobDetails = () => {
       }
 
       await axios.post(
-        `https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/applications/apply/${jobId}`,
+        `http://localhost:3700/api/jobyc/applications/apply/${jobId}`,
         {},
         { withCredentials: true }
       );
@@ -74,11 +102,87 @@ export const JobDetails = () => {
         </div>
         <div style={{ textAlign: "center" }}>
           {user?.role === "jobseeker" && (
-            <button onClick={handleApply} disabled={applied}>
-              {applied ? "Applied" : "Apply"}
-            </button>
+            <div style={{ textAlign: "center" }}>
+              {job.matchScore !== undefined && (
+                <div
+                  style={{
+                    marginBottom: "10px",
+                    position: "relative",
+                    width: "300px",
+                    margin: "0 auto",
+                  }}
+                >
+                  {/* Floating tag above bar */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      bottom: "30px",
+                      // left: `min(${job.matchScore}%, 100%)`,
+                      left: "100%",
+                      transform:
+                        job.matchScore === 100
+                          ? "translateX(-100%)"
+                          : "translateX(-50%)",
+                      // background:
+                      //   job.matchScore >= 70
+                      //     ? "#4caf50"
+                      //     : job.matchScore >= 40
+                      //     ? "#ff9800"
+                      //     : "#f44336",
+                      background: "#c569c6ff",
+                      color: "#fff",
+                      padding: "4px 8px",
+                      fontSize: "11px",
+                      fontWeight: "600",
+                      borderRadius: "10px",
+                      whiteSpace: "nowrap",
+                    }}
+                  >
+                    {job.matchScore >= 70
+                      ? "High 😍"
+                      : job.matchScore >= 40
+                      ? "Medium 😊"
+                      : "Low 🙁"}
+            
+                    {/* ({job.matchScore}%) */}
+                  </div>
+
+                  {/* Progress bar background */}
+                  <div
+                    style={{
+                      backgroundColor: "#e0e0e0",
+                      borderRadius: "6px",
+                      overflow: "hidden",
+                      height: "22px",
+                      width: "100%",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    {/* Fill */}
+                    <div
+                      style={{
+                        // width: `${job.matchScore}%`,
+                        backgroundColor:
+                          job.matchScore >= 70
+                            ? "#4caf50"
+                            : job.matchScore >= 40
+                            ? "#ff9800"
+                            : "#f44336",
+                        height: "100%",
+                        transition: "width 0.5s ease",
+                      }}
+                    ></div>
+                  </div>
+                </div>
+              )}
+
+              <button onClick={handleApply} disabled={applied}>
+                {applied ? "Applied" : "Apply"}
+              </button>
+            </div>
           )}
         </div>
+
         <p>
           <strong>Job Description</strong>
           <hr />
@@ -111,7 +215,7 @@ export const JobDetails = () => {
                 recruiter?.profileImage &&
                 recruiter.profileImage !== "null" &&
                 recruiter.profileImage !== ""
-                  ? `https://jobyc-4ad8ff06194c.herokuapp.com${recruiter.profileImage}`
+                  ? `http://localhost:3700${recruiter.profileImage}`
                   : "http://localhost:3000/user.jpg"
               }
               alt={recruiter?.name || "Recruiter"}
