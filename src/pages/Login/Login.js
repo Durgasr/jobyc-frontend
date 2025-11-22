@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { UserContext } from "../../context/userContext.js";
 import { Link } from "react-router-dom";
@@ -8,8 +7,7 @@ import { Navbar } from "../../components/Navbar/Navbar.js";
 import { Layout } from "../../components/Layout/Layout.js";
 
 export const Login = () => {
-  const navigate = useNavigate();
-  const { setUser, setLoading } = useContext(UserContext);
+  const { setUser} = useContext(UserContext);
   const [error, setError] = useState(null);
   const [formData, setFormData] = useState({
     email: "",
@@ -22,24 +20,21 @@ export const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-
     try {
       const res = await axios.post(
         "https://jobyc-4ad8ff06194c.herokuapp.com/api/jobyc/user/login",
         formData,
-        { withCredentials: true } // important to send/receive cookie
+        { withCredentials: true }
       );
-
-      setUser(res.data.user); // update context with logged-in user
-      setLoading(false);
-
-      // Redirect based on role
-      if (res.data.user.role === "jobseeker") navigate("/jobs");
-      else if (res.data.user.role === "recruiter") navigate("/dashboard");
+      console.log(res);
+      if (res.status === 200) {
+        setUser(res.data.user);
+        
+      } else {
+        setError(res.data.error);
+      }
     } catch (err) {
-      setLoading(false);
-      setError(err.response?.data?.error || "Login failed");
+      setError(err?.response?.data?.error || "Invalid email or password");
     }
   };
 
